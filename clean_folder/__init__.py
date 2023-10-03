@@ -1,4 +1,4 @@
 from clean_folder.clean import main
 
 
-__all__ = ['main1']
+__all__ = ['main']
