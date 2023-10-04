@@ -1,7 +1,7 @@
 import os
 import shutil
 import re
-import sys
+import click
 from pathlib import Path
 
 def normalize(name):
@@ -68,14 +68,11 @@ def print_files_in_category(category_folder):
     for file_path in category_folder.iterdir():
         print(file_path)
 
+@click.command()
+@click.argument('folder_path', type=click.Path(exists=True))
 def main(folder_path):
-    if len(sys.argv) != 2:
-        print("Usage: python clean.py <folder_path>")
-        return
-
-    folder_path = Path(sys.argv[1])
+    folder_path = Path(folder_path)
     print("Start in", folder_path)
-
 
     if not folder_path.exists():
         print("Folder does not exist.")
@@ -100,7 +97,4 @@ def main(folder_path):
     print("Unknown extensions:", unknown_extensions)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python clean.py <folder_path>")
-    else:
-        main(sys.argv[1])
+    main()
